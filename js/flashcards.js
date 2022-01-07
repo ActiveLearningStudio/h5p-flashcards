@@ -445,13 +445,46 @@ H5P.Flashcards = (function ($, XapiGenerator) {
       'class': 'h5p-results-retry-button h5p-visible h5p-button',
       'text': "Submit Results"
     }).on('click', function () {
-      const xAPIEvent = XapiGenerator.getXapiEvent(this);
+      const xAPIEvent = this.createXAPIEventTemplate('answered');
+      const definition = xAPIEvent.getVerifiedStatementValue(['object', 'definition']);
+      $.extend(definition, getxAPIDefinition(this));
+      xAPIEvent.setScoredResult(
+        this.getScore(),
+        this.getMaxScore(),
+        this
+      );
+      xAPIEvent.data.statement.result.response = instance.answers.join('[,]');
+      // const xAPIEvent = XapiGenerator.getXapiEvent(this);
       this.trigger(xAPIEvent);
       // that.triggerXAPIScored(this.getScore(), this.getMaxScore(), 'answered');
       that.triggerXAPIScored(this.getScore(), this.getMaxScore(), 'submitted-curriki');
       // self.triggerXAPIScored(this.getScore(), this.getMaxScore(), 'completed');
     }).appendTo(this.$resultScreen);
     
+  };
+
+  const getxAPIDefinition = function (this) {
+    const definition = {};
+    definition.description = {
+      'en-US': '<p>' + this.options.description + '</p>'
+    };
+    definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
+    definition.interactionType = 'fill-in';
+    definition.correctResponsesPattern = [
+      '{case_matters=' + this.options.caseSensitive + '}'
+    ];
+    const crpAnswers = this.options.cards.map(function (card) {
+      return card.answer;
+    }).join('[,]');
+
+    definition.correctResponsesPattern[0] += crpAnswers;
+
+    const cardDescriptions = this.options.cards.map(function (card) {
+      return '<p>' + card.text + ' ' + placeHolder + '</p>';
+    }).join('');
+
+    definition.description['en-US'] += cardDescriptions;
+    return definition;
   };
 
   /**
