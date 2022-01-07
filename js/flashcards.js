@@ -463,7 +463,7 @@ H5P.Flashcards = (function ($, XapiGenerator) {
     
   };
 
-  const getxAPIDefinition = function (this) {
+  C.prototype.getxAPIDefinition = function () {
     const definition = {};
     definition.description = {
       'en-US': '<p>' + this.options.description + '</p>'
