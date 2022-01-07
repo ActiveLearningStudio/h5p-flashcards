@@ -442,7 +442,7 @@ H5P.Flashcards = (function ($, XapiGenerator) {
 
 
     this.$submitButton = $('<button/>', {
-      'class': 'h5p-results-retry-button h5p-visible h5p-button',
+      'class': 'h5p-results-button h5p-visible h5p-button',
       'text': "Submit Results"
     }).on('click', function () {
       const xAPIEvent = that.createXAPIEventTemplate('answered');
@@ -464,9 +464,10 @@ H5P.Flashcards = (function ($, XapiGenerator) {
   };
 
   C.prototype.getxAPIDefinition = function () {
+    //'en-US': '<p>' + this.options.description + '</p>'
     const definition = {};
     definition.description = {
-      // 'en-US': '<p>' + this.options.description + '</p>'
+       'en-US': '<p> </p>'
     };
     definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
     definition.interactionType = 'fill-in';
@@ -478,7 +479,7 @@ H5P.Flashcards = (function ($, XapiGenerator) {
     }).join('[,]');
 
     definition.correctResponsesPattern[0] += crpAnswers;
-    const placeHolder = '__________';
+    const placeHolder = '__';
     const cardDescriptions = this.options.cards.map(function (card) {
       return '<p>' + card.text + ' ' + placeHolder + '</p>';
     }).join('');

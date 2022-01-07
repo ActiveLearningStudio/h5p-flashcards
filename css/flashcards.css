@@ -611,6 +611,26 @@ button::-moz-focus-inner {
   margin-right: 0.5em;
 }
 
+.h5p-flashcards .h5p-results-button {
+  display: block;
+  margin: 0 auto;
+  width: 9em;
+  padding: 0.87em;
+  color: #adb6c7;
+  background: none;
+  border: 1px solid #414d66;
+}
+
+.h5p-flashcards .h5p-results-button:hover {
+  background-color: #414d66;
+}
+
+.h5p-flashcards .h5p-results-button:before {
+  font-family: "H5PFontAwesome4";
+  /* content: "\f01e"; */
+  margin-right: 0.5em;
+}
+
 .h5p-flashcards .h5p-results-score {
   position: absolute;
   color: #adb6c7;
