@@ -274,6 +274,8 @@ H5P.Flashcards = (function ($, XapiGenerator) {
       .appendTo($inner.parent());
   };
 
+
+
   /**
    * Add card
    * @param {number} index
@@ -437,6 +439,19 @@ H5P.Flashcards = (function ($, XapiGenerator) {
     }).on('click', function () {
       that.resetTask();
     }).appendTo(this.$resultScreen);
+
+
+    this.$submitButton = $('<button/>', {
+      'class': 'h5p-results-retry-button h5p-visible h5p-button',
+      'text': "Submit Results"
+    }).on('click', function () {
+      const xAPIEvent = XapiGenerator.getXapiEvent(this);
+      this.trigger(xAPIEvent);
+      // that.triggerXAPIScored(this.getScore(), this.getMaxScore(), 'answered');
+      that.triggerXAPIScored(this.getScore(), this.getMaxScore(), 'submitted-curriki');
+      // self.triggerXAPIScored(this.getScore(), this.getMaxScore(), 'completed');
+    }).appendTo(this.$resultScreen);
+    
   };
 
   /**
