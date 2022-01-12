@@ -35,9 +35,13 @@ H5P.Flashcards = (function ($, XapiGenerator) {
       results: "Results",
       ofCorrect: "@score of @total correct",
       showResults: "Show results",
+      submitAnswers: "Submit Answers",
       retry : "Retry",
       cardAnnouncement: 'Incorrect answer. Correct answer was @answer',
       pageAnnouncement: 'Page @current of @total',
+      // behaviour: {
+        showSubmitAnswersButton: true
+      // }
     }, options);
     this.$images = [];
     this.hasBeenReset = false;
@@ -433,17 +437,22 @@ H5P.Flashcards = (function ($, XapiGenerator) {
       'class': 'h5p-results-list'
     }).appendTo(this.$resultScreen);
 
+    this.$outder_div = $('<div/>', {
+      'class': 'outer-div'
+    });
+
+
     this.$retryButton = $('<button/>', {
-      'class': 'h5p-results-retry-button h5p-invisible h5p-button',
+      'class': 'h5p-results-retry-button h5p-invisible h5p-button inner-div',
       'text': this.options.retry
     }).on('click', function () {
       that.resetTask();
-    }).appendTo(this.$resultScreen);
+    }).appendTo(this.$outder_div);
 
 
     this.$submitButton = $('<button/>', {
-      'class': 'h5p-results-button h5p-visible h5p-button',
-      'text': "Submit Results"
+      'class': 'h5p-results-button h5p-visible h5p-button inner-div',
+      'text': that.options.submitAnswers
     }).on('click', function () {
       const xAPIEvent = that.createXAPIEventTemplate('answered');
       const definition = xAPIEvent.getVerifiedStatementValue(['object', 'definition']);
@@ -459,7 +468,16 @@ H5P.Flashcards = (function ($, XapiGenerator) {
       // that.triggerXAPIScored(this.getScore(), this.getMaxScore(), 'answered');
       that.triggerXAPIScored(that.getScore(), that.getMaxScore(), 'submitted-curriki');
       // self.triggerXAPIScored(this.getScore(), this.getMaxScore(), 'completed');
-    }).appendTo(this.$resultScreen);
+    }).appendTo(this.$outder_div);
+
+    this.$outder_div.appendTo(this.$resultScreen);
+
+    if(!that.options.showSubmitAnswersButton)
+    {
+      this.$submitButton.removeClass('h5p-visible');
+      this.$submitButton.addClass('h5p-invisible');
+    }
+      
     
   };
 

@@ -88,7 +88,7 @@
     "type": "text",
     "default": "Card @card of @total",
     "importance": "low",
-    "description": "Progress text, variables available: @card and @total. Example: 'Card @card of @total'",
+    "description": "Progress text, variables available: @card and @total. Example: Card @card of @total",
     "common": true
   },
   {
@@ -112,6 +112,22 @@
     "name": "checkAnswerText",
     "type": "text",
     "default": "Check",
+    "importance": "low",
+    "common": true
+  },
+  {
+    "label": "Show Submit Answers Button",
+    "name": "showSubmitAnswersButton",
+    "type": "boolean",
+    "default": true,
+    "importance": "high",
+    "optional": true
+  },
+  {
+    "label": "Text for Submit Answers Button",
+    "name": "submitAnswers",
+    "type": "text",
+    "default": "Submit Answers",
     "importance": "low",
     "common": true
   },
@@ -169,7 +185,7 @@
     "type": "text",
     "default": "@score of @total correct",
     "importance": "low",
-    "description": "Result text, variables available: @score and @total. Example: '@score of @total correct'",
+    "description": "Result text, variables available: @score and @total. Example: @score of @total correct",
     "common": true
   },
   {

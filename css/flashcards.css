@@ -948,3 +948,13 @@ button::-moz-focus-inner {
   left: 0;
   overflow: hidden;
 }
+.outer-div
+{
+    width:100%;
+    text-align: center;
+}
+.inner-div
+{
+    display: inline-block !important;
+    margin: 15px !important;
+}
